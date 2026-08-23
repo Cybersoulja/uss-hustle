@@ -1,0 +1,35 @@
+# ==============================================================================
+# Git Ignore Configuration - USS Hustle
+# ==============================================================================
+
+# Secrets & Local Environment
+.env
+.env.*
+.env.local
+*.pem
+*.key
+*.cert
+credentials.json
+secrets.json
+
+# Whitelist safe templates
+!.env.template
+!.env.example
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Dependencies & Build Dumps
+node_modules/
+dist/
+.wrangler/
+*.log
+
+# Python & Caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/

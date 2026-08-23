@@ -1,0 +1,111 @@
+{
+  "version": "1.0.0",
+  "name": "Space Age Hustle - Notion Story Nodes Matrix",
+  "nodes": [
+    {
+      "id": "NODE_001",
+      "trigger": "start",
+      "speaker": "Trill Astro Buzz",
+      "text": "COMMANDER! Welcome aboard the Space Age Hustle. Gravity has officially been disengaged. Ready to chart your tickets across the stars?",
+      "choices": ["Let's Hustle", "View Crew"]
+    },
+    {
+      "id": "NODE_002",
+      "trigger": "select_mission",
+      "speaker": "Trill Astro Buzz",
+      "text": "I'm scanning your orbit. 3 critical tickets are approaching the event horizon. Which one are we targeting first?",
+      "choices": ["JIRA-101 (Bug)", "JIRA-102 (API)"]
+    },
+    {
+      "id": "NODE_003",
+      "trigger": "unlock_nova",
+      "speaker": "Nova Starwind",
+      "text": "Commander. I've observed your syntax. Clean, fast, and lethal to bugs. I am Nova Starwind. Let's optimize this architecture.",
+      "choices": ["Welcome Aboard Nova!"]
+    },
+    {
+      "id": "NODE_004",
+      "trigger": "unlock_orion",
+      "speaker": "Orion Codex",
+      "text": "Plasma shields at 100%. CI/CD pipelines verified green across all edge nodes. Orion Codex reporting for orbital DevOps duty.",
+      "choices": ["Engage Plasma Shield"]
+    },
+    {
+      "id": "NODE_005",
+      "trigger": "unlock_vega",
+      "speaker": "Vega Quantum",
+      "text": "Tachyon scan complete. No edge cases or null pointers escape my instruments. Let's write airtight code, Commander.",
+      "choices": ["Calibrate Test Suite"]
+    },
+    {
+      "id": "NODE_006",
+      "trigger": "unlock_zara",
+      "speaker": "Zara Nebula",
+      "text": "Quantum sync active. Backlog prioritization matrix adjusted for maximum sprint velocity. What's our next milestone?",
+      "choices": ["Sync Milestones"]
+    },
+    {
+      "id": "NODE_007",
+      "trigger": "unlock_atlas",
+      "speaker": "Atlas Comet",
+      "text": "Zero downtime protocol initiated. You've sustained triple weekly deployments. You are ready for warp speed.",
+      "choices": ["Activate Zero Downtime"]
+    },
+    {
+      "id": "NODE_008",
+      "trigger": "checkin_in_progress",
+      "speaker": "Trill Astro Buzz",
+      "text": "Status report, Commander! The gravity field is low, but momentum is high. How is the code flowing?",
+      "choices": ["Almost Done", "Need Powerup"]
+    },
+    {
+      "id": "NODE_009",
+      "trigger": "checkin_complete",
+      "speaker": "Trill Astro Buzz",
+      "text": "BY THE FLOATING NEBULAE! PR merged in record time! XP banked and loot incoming. That's how we hustle in zero-g.",
+      "choices": ["Claim Rewards", "Next Quest"]
+    },
+    {
+      "id": "NODE_010",
+      "trigger": "motivate_1",
+      "speaker": "Trill Astro Buzz",
+      "text": "Every commit is a step on the moon of progress. Keep your thrusters firing!",
+      "choices": ["Acknowledge 🚀"]
+    },
+    {
+      "id": "NODE_011",
+      "trigger": "motivate_2",
+      "speaker": "Trill Astro Buzz",
+      "text": "Coffee: the dark matter that powers the universe. Refuel and conquer.",
+      "choices": ["Drink Dark Matter ☕"]
+    },
+    {
+      "id": "NODE_012",
+      "trigger": "loyalty_up",
+      "speaker": "Nova Starwind",
+      "text": "My neural weights are aligning with your coding style. Slingshot Refactor cooldown reduced by 50%.",
+      "choices": ["Inspect Abilities"]
+    },
+    {
+      "id": "NODE_013",
+      "trigger": "energy_low",
+      "speaker": "Orion Codex",
+      "text": "Warning: Energy levels dropping below 20%. Recommend initiating a 15-minute orbital recess.",
+      "choices": ["Take Breather", "Push Through"]
+    },
+    {
+      "id": "NODE_014",
+      "trigger": "streak_7d",
+      "speaker": "Trill Astro Buzz",
+      "text": "7-DAY STREAK IGNITED! You're orbiting legend status. Quantum Levitation Token dropped into your cargo bay.",
+      "choices": ["Equip Token"]
+    },
+    {
+      "id": "NODE_015",
+      "trigger": "critical_bug",
+      "speaker": "Vega Quantum",
+      "text": "P1 anomaly detected in production sector! All hands to battle stations. Nova and I are on standby.",
+      "choices": ["Accept Critical Quest"]
+    }
+  ]
+}

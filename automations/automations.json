@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "automations": [
+    {
+      "id": "auto_morning_briefing",
+      "name": "Trill Astro Buzz Morning Briefing",
+      "trigger": "schedule",
+      "cron": "0 9 * * 1-5",
+      "action": "create_session",
+      "params": {
+        "title": "🌅 09:00 Daily Hustle Briefing",
+        "agent": "Trill Astro Buzz",
+        "initialPrompt": "Good morning Commander! Scan connected Jira and GitHub sources, summarize top 3 orbital priorities for today, and grant daily login XP."
+      }
+    },
+    {
+      "id": "auto_critical_ticket",
+      "name": "Auto-Deploy Nova on P1 Bugs",
+      "trigger": "source_event",
+      "source": "jira",
+      "filter": { "priority": "High", "issueType": "Bug" },
+      "action": "create_session",
+      "params": {
+        "title": "🚨 P1 Anomaly Detected",
+        "agent": "Nova Starwind",
+        "initialPrompt": "Nova Starwind, a high-priority bug was just assigned. Scan the relevant repository files and generate a rapid triage plan."
+      }
+    },
+    {
+      "id": "auto_deployment_check",
+      "name": "Orion Codex Plasma Shield on PR Merge",
+      "trigger": "source_event",
+      "source": "github",
+      "filter": { "action": "closed", "merged": true, "base_ref": "main" },
+      "action": "run_skill",
+      "params": {
+        "skill": "plasma-shield-orion",
+        "prompt": "PR was just merged to main. Verify build pipeline, check Cloudflare Worker logs, and verify deployment integrity."
+      }
+    }
+  ]
+}

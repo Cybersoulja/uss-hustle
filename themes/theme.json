@@ -1,0 +1,31 @@
+{
+  "name": "Space Age Hustle - Dark Nebula",
+  "version": "1.0.0",
+  "colors": {
+    "background": "#0b0d17",
+    "surface": "#121626",
+    "surfaceHover": "#1a2035",
+    "border": "#232b47",
+    "primary": "#6366f1",
+    "primaryHover": "#4f46e5",
+    "accent": "#06b6d4",
+    "accentGlow": "rgba(6, 182, 212, 0.25)",
+    "text": "#f8fafc",
+    "textMuted": "#94a3b8",
+    "success": "#10b981",
+    "warning": "#f59e0b",
+    "danger": "#ef4444",
+    "gold": "#fbbf24"
+  },
+  "typography": {
+    "fontFamily": "JetBrains Mono, SF Pro Display, -apple-system, sans-serif",
+    "monoFamily": "JetBrains Mono, Menlo, monospace"
+  },
+  "customStatuses": [
+    { "id": "docked", "label": "Docked at Base", "color": "#64748b" },
+    { "id": "hustling", "label": "Hustling in Orbit", "color": "#06b6d4" },
+    { "id": "warp_speed", "label": "Warp Speed (PR Review)", "color": "#6366f1" },
+    { "id": "boss_battle", "label": "P1 Incident Battle", "color": "#ef4444" },
+    { "id": "mission_complete", "label": "Mission Banked (XP Claimed)", "color": "#10b981" }
+  ]
+}

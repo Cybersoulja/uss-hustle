@@ -1,8 +1,10 @@
 // =============================================================================
-// Cloudflare Worker: Space Age Hustle Telegram Webhook Gateway
+// Cloudflare Worker: Space Age Hustle Telegram & Push Gateway
 // =============================================================================
 
-export interface Env {
+import { sendNotifyPush, sendDailyBriefing, sendCriticalAlert, sendDeploymentAlert, NotifyEnv } from './notify';
+
+export interface Env extends NotifyEnv {
   DB: D1Database;
   STORY_KV: KVNamespace;
   TELEGRAM_BOT_TOKEN: string;
@@ -11,19 +13,61 @@ export interface Env {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    if (request.method !== 'POST') {
+    const url = new URL(request.url);
+
+    // Route: GET / (Health / Ping)
+    if (request.method === 'GET' && url.pathname === '/') {
       return new Response('USS Hustle Space Gateway Online 🚀', { status: 200 });
     }
 
-    try {
-      const update = await request.json<any>();
-      if (update.message) {
-        await handleMessage(update.message, env);
+    // Route: POST /notify (Direct Push Dispatch)
+    if (request.method === 'POST' && url.pathname === '/notify') {
+      try {
+        const body = await request.json<any>();
+        const result = await sendNotifyPush(env, body);
+        return new Response(JSON.stringify(result), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        });
       }
-      return new Response('OK', { status: 200 });
-    } catch (err: any) {
-      return new Response(`Error: ${err.message}`, { status: 500 });
     }
+
+    // Route: POST /briefing (Morning Briefing Trigger)
+    if (request.method === 'POST' && url.pathname === '/briefing') {
+      try {
+        const body = await request.json<any>().catch(() => ({}));
+        const result = await sendDailyBriefing(env, body);
+        return new Response(JSON.stringify(result), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+
+    // Route: POST / (Telegram Webhook)
+    if (request.method === 'POST') {
+      try {
+        const update = await request.json<any>();
+        if (update.message) {
+          await handleMessage(update.message, env);
+        }
+        return new Response('OK', { status: 200 });
+      } catch (err: any) {
+        return new Response(`Error: ${err.message}`, { status: 500 });
+      }
+    }
+
+    return new Response('Not Found', { status: 404 });
   }
 };
 
@@ -39,6 +83,7 @@ async function handleMessage(msg: any, env: Env) {
       `Commands:\n` +
       `• /crew — Inspect your floating agent roster\n` +
       `• /missions — View active orbital quests\n` +
+      `• /briefing — Trigger daily morning briefing push\n` +
       `• /checkin — Report work progress & claim XP\n` +
       `• /motivate — Receive floating motivation`
     );
@@ -53,6 +98,13 @@ async function handleMessage(msg: any, env: Env) {
       `   "Plasma shield standing by." (Energy: 95% | Loyalty: 80%)\n\n` +
       `💫 _All agents floating in zero-gravity harmony._`
     );
+  } else if (text.startsWith('/briefing')) {
+    try {
+      await sendDailyBriefing(env);
+      await sendTelegram(env, chatId, `🌅 *Daily Morning Briefing* dispatched to your Notify! iOS device.`);
+    } catch (e: any) {
+      await sendTelegram(env, chatId, `⚠️ Push notification dispatch error: ${e.message}`);
+    }
   } else if (text.startsWith('/motivate')) {
     const quotes = [
       "Every commit is a step on the moon of progress.",

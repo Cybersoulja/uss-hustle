@@ -85,3 +85,76 @@ CREATE TABLE IF NOT EXISTS logs (
     payload TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 7. Operations command-center configuration. Populate these tables through an
+-- operator-controlled migration; Telegram identities are never inferred from a display name.
+CREATE TABLE IF NOT EXISTS telegram_admins (
+    telegram_id INTEGER PRIMARY KEY,
+    display_name TEXT,
+    is_active BOOLEAN DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS teammates (
+    id TEXT PRIMARY KEY,
+    display_name TEXT NOT NULL,
+    telegram_id INTEGER UNIQUE,
+    telegram_username TEXT UNIQUE,
+    jira_account_id TEXT,
+    is_active BOOLEAN DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS operation_drafts (
+    id TEXT PRIMARY KEY,
+    requested_by_telegram_id INTEGER NOT NULL,
+    chat_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    priority TEXT NOT NULL DEFAULT 'Medium',
+    due_at TIMESTAMP,
+    crew_code TEXT NOT NULL,
+    teammate_id TEXT,
+    state TEXT NOT NULL DEFAULT 'PENDING', -- PENDING, EXECUTING, APPROVED, CANCELLED, EXPIRED, FAILED
+    jira_project_key TEXT,
+    jira_issue_key TEXT UNIQUE,
+    idempotency_key TEXT NOT NULL UNIQUE,
+    expires_at TIMESTAMP NOT NULL,
+    approved_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (teammate_id) REFERENCES teammates(id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_operation_drafts_state_expiry ON operation_drafts(state, expires_at);
+
+CREATE TABLE IF NOT EXISTS operation_deliveries (
+    id TEXT PRIMARY KEY,
+    draft_id TEXT,
+    kind TEXT NOT NULL, -- ASSIGNMENT, DUE_REMINDER, ESCALATION, STATUS_UPDATE
+    idempotency_key TEXT NOT NULL UNIQUE,
+    target_telegram_id INTEGER,
+    status TEXT NOT NULL DEFAULT 'PENDING',
+    provider_message_id TEXT,
+    error_message TEXT,
+    delivered_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (draft_id) REFERENCES operation_drafts(id)
+);
+
+CREATE TABLE IF NOT EXISTS operation_webhook_events (
+    id TEXT PRIMARY KEY,
+    source TEXT NOT NULL,
+    external_event_id TEXT NOT NULL,
+    payload TEXT NOT NULL,
+    processed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(source, external_event_id)
+);
+
+CREATE TABLE IF NOT EXISTS operation_audit_events (
+    id TEXT PRIMARY KEY,
+    actor_telegram_id INTEGER,
+    event_type TEXT NOT NULL,
+    payload TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

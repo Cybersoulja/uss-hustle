@@ -1,0 +1,190 @@
+{
+  "commander": {
+    "callsign": "Commander",
+    "rank": "Junior Hustler",
+    "level": 3,
+    "xp": 530,
+    "xp_to_next": 600,
+    "streak_days": 7,
+    "status": "Hustling"
+  },
+  "stats": {
+    "bugs_fixed": 6,
+    "deployments": 4,
+    "tests_written": 12,
+    "meetings_led": 3,
+    "weekly_deploys": 3
+  },
+  "agents": [
+    {
+      "id": "buzz",
+      "name": "Trill Astro Buzz",
+      "role": "First Officer",
+      "title": "Cosmic Clutch",
+      "rank": "LEGEND",
+      "stars": "\u2b50\u2b50\u2b50\u2b50\u2b50",
+      "level": 5,
+      "xp": 1250,
+      "loyalty": 100,
+      "energy": 100,
+      "stage": "Transcended",
+      "power": "Cosmic Clutch (+10% XP & Zero-G Motivation)",
+      "catchphrase": "The grind never stops, Commander. Gravity is optional.",
+      "unlocked": true
+    },
+    {
+      "id": "nova",
+      "name": "Nova Starwind",
+      "role": "Code Navigator",
+      "title": "Slingshot Refactor",
+      "rank": "EXPERT",
+      "stars": "\u2b50\u2b50\u2b50\u2b50",
+      "level": 4,
+      "xp": 820,
+      "loyalty": 92,
+      "energy": 85,
+      "stage": "Enlightened",
+      "power": "Slingshot Refactor (Complexity breakdown & +25 XP)",
+      "catchphrase": "I can see clean code from orbit.",
+      "unlocked": true
+    },
+    {
+      "id": "orion",
+      "name": "Orion Codex",
+      "role": "DevOps Engineer",
+      "title": "Plasma Shield",
+      "rank": "VETERAN",
+      "stars": "\u2b50\u2b50\u2b50",
+      "level": 3,
+      "xp": 640,
+      "loyalty": 78,
+      "energy": 92,
+      "stage": "Awakened",
+      "power": "Plasma Shield (Zero-downtime preflight CI/CD)",
+      "catchphrase": "Pipelines run faster than light.",
+      "unlocked": true
+    },
+    {
+      "id": "vega",
+      "name": "Vega Quantum",
+      "role": "QA Scientist",
+      "title": "Tachyon Scan",
+      "rank": "SPECIALIST",
+      "stars": "\u2b50\u2b50\u2b50",
+      "level": 3,
+      "xp": 580,
+      "loyalty": 72,
+      "energy": 90,
+      "stage": "Awakened",
+      "power": "Tachyon Scan (Edge-case discovery & test fixtures)",
+      "catchphrase": "No bug escapes the tachyon scan.",
+      "unlocked": true
+    },
+    {
+      "id": "zara",
+      "name": "Zara Nebula",
+      "role": "Project Wrangler",
+      "title": "Quantum Sync",
+      "rank": "SPECIALIST",
+      "stars": "\u2b50\u2b50\u2b50",
+      "level": 3,
+      "xp": 510,
+      "loyalty": 68,
+      "energy": 88,
+      "stage": "Awakened",
+      "power": "Quantum Sync (Auto-prioritize backlogs & sprints)",
+      "catchphrase": "Backlogs aligned across all light-years.",
+      "unlocked": true
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas Comet",
+      "role": "Release Engineer",
+      "title": "Zero Downtime",
+      "rank": "LEGEND",
+      "stars": "\u2b50\u2b50\u2b50\u2b50\u2b50",
+      "level": 5,
+      "xp": 1400,
+      "loyalty": 95,
+      "energy": 95,
+      "stage": "Transcended",
+      "power": "Zero Downtime (Multi-service release cutover warp)",
+      "catchphrase": "Zero downtime is a universal law.",
+      "unlocked": true
+    }
+  ],
+  "missions": [
+    {
+      "id": "JIRA-101",
+      "title": "Resolve OAuth2 Token Refresh Race Condition",
+      "category": "Bug",
+      "priority": "\ud83d\udd25 Cosmic P1",
+      "xp": 110,
+      "assigned_to": "Nova Starwind",
+      "status": "In Orbit (75%)"
+    },
+    {
+      "id": "JIRA-102",
+      "title": "Deploy Cloudflare D1 Schema Migrations",
+      "category": "DevOps",
+      "priority": "\u26a1 High Orbit",
+      "xp": 90,
+      "assigned_to": "Orion Codex",
+      "status": "Queued"
+    },
+    {
+      "id": "JIRA-103",
+      "title": "Write Tachyon Test Suite for Gateway API",
+      "category": "QA",
+      "priority": "\ud83d\udd2c Standard",
+      "xp": 80,
+      "assigned_to": "Vega Quantum",
+      "status": "Queued"
+    },
+    {
+      "id": "JIRA-104",
+      "title": "Synchronize Sprint Backlog with Notion Story Matrix",
+      "category": "Project",
+      "priority": "\ud83c\udf0c Standard",
+      "xp": 70,
+      "assigned_to": "Zara Nebula",
+      "status": "Queued"
+    }
+  ],
+  "inventory": [
+    {
+      "name": "Quantum Coffee",
+      "count": 3,
+      "desc": "Restores 25% energy to active crew member"
+    },
+    {
+      "name": "Warp Accelerator",
+      "count": 1,
+      "desc": "Doubles XP on next mission completion"
+    },
+    {
+      "name": "Tachyon Crystal",
+      "count": 2,
+      "desc": "Instantly discovers 3 hidden edge cases"
+    },
+    {
+      "name": "Quantum Levitation Token",
+      "count": 1,
+      "desc": "Zero-gravity shield (+50% bonus on PR review)"
+    }
+  ],
+  "dispatches": [
+    {
+      "headline": "Craft Agents OSS Cockpit Docked",
+      "date": "2026.08.22",
+      "summary": "Installed native macOS desktop HUD with 6 custom crew skills.",
+      "source": "/Applications/Craft Agents.app"
+    },
+    {
+      "headline": "Telegram Gateway API Online",
+      "date": "2026.08.22",
+      "summary": "Direct OTP deliverability and verification channel enabled with TTL refunds.",
+      "source": "https://gatewayapi.telegram.org"
+    }
+  ]
+}

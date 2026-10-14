@@ -51,6 +51,44 @@ If the router lacks confidence, it proposes no runtime and requires the
 operator to select one. Each mission records overrides so future routing rules
 can be refined transparently.
 
+## Optional Cloudflare Clef decision classification
+
+Cloudflare Clef may be used as an **optional, advisory** classification provider
+before the existing deterministic router. The baseline deterministic routing
+table above remains the source of safe fallback behavior. Clef is not an
+execution runtime and cannot authorize actions, approve missions, select
+arbitrary integrations, or bypass the Telegram approval gate.
+
+The classifier sends only the minimum sanitized, bounded mission description
+needed for classification. It requests typed, constrained decisions for the
+mission category (`engineering`, `content`, `operations`), advisor
+(`nova`, `orion`, `vega`, `zara`, `atlas`, `trill`), and runtime
+(`codex`, `jules`, `craft`, `zapier`, `local`, `manual`). A
+selection rationale may be generated separately, but it is untrusted advisory
+text and never an instruction to dispatch. Model-specific request and response
+shapes must be verified against Cloudflare's current documentation before
+implementation; this specification does not assume a particular SDK schema.
+
+The Mission Broker validates each returned choice against the allowlists,
+checks that the category, advisor, and runtime combination is permitted by
+routing policy, and applies a configured confidence/uncertainty policy when
+the provider supplies usable decision scores. Never treat a model's score as
+authorization. Missing scores, malformed results, policy-incompatible choices,
+timeouts, errors, or disabled/unconfigured Clef cause a deterministic fallback.
+If neither path can confidently select a permitted runtime, propose
+`manual` and require the operator to choose one.
+
+The proposal records the classification source (`clef`, `deterministic`,
+or `manual`), validated recommendation, rationale, and any operator
+override for auditability. Only the exact final proposal approved by an
+authorized Telegram operator can transition to launch. Approval is
+mission-scoped and idempotent; changing the advisor or runtime requires a
+new approval of the updated proposal.
+
+Initial rollout is opt-in and can be disabled without affecting deterministic
+classification. Do not introduce autonomous launches, multi-agent swarms, or
+automatic merging of pull requests.
+
 ## Runtime adapters
 
 - **Codex adapter:** creates a scoped coding task and links its resulting
@@ -88,3 +126,7 @@ ready, completion, and failure.
    or failed status to its originating Telegram conversation.
 5. Duplicate Telegram callbacks and Zapier/webhook retries produce no duplicate
    external effects.
+6. Clef is optional; invalid, unavailable, or policy-incompatible decisions
+   fall back safely without dispatching or bypassing Telegram approval.
+7. Clef recommendations and operator overrides are auditable, and changing an
+   approved proposal requires renewed approval before any launch.

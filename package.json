@@ -7,7 +7,9 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "db:migrate": "wrangler d1 execute space-age-hustle-db --file=src/db/schema.sql",
-    "tui": "python3 scripts/uss-hustle-tui.py"
+    "tui": "python3 scripts/uss-hustle-tui.py",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": ["space-age-hustle", "trill-astro-buzz", "rpg", "productivity", "cloudflare-workers", "d1"],
   "author": "Oneseco Media",
@@ -15,6 +17,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
     "typescript": "^5.3.3",
-    "wrangler": "^3.28.0"
+    "wrangler": "^3.28.0",
+    "vitest": "^3.0.0"
   }
 }
